@@ -10,13 +10,14 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V4.App;
 using CoursesLibrary;
+using Java.Lang;
 
 namespace CoursesAndroid 
 {
-    class CoursePagerAdapter :  FragmentStatePagerAdapter
+    class CoursePagerAdapter : FragmentStatePagerAdapter
     {
         public CoursePagerAdapter(FragmentManager fm, CourseManager courseManager)
-            :base(fm)
+            : base(fm)
         {
             this.courseManager = courseManager;
         }
@@ -37,7 +38,19 @@ namespace CoursesAndroid
             get { return courseManager.Length; }
         }
 
-        
+        public CourseManager CourseManager
+        {
+            set
+            {
+                courseManager = value;
+                NotifyDataSetChanged();
+            }
 
+        }
+
+        public override int GetItemPosition(Java.Lang.Object objectValue)
+        {
+            return PositionNone;
+        }
     }
-}
+ }
